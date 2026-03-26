@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; width: 350px; }
+        h1 { color: #333; margin-bottom: 0.5rem; }
+        p { color: #666; line-height: 1.6; }
+        .tag { color: #007bff; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
+        .email { margin-top: 1rem; display: block; color: #555; text-decoration: none; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="tag" id="tagline">Loading...</div>
+        <h1 id="name">...</h1>
+        <p id="bio">Connecting to database...</p>
+        <a href="#" class="email" id="email">...</a>
+    </div>
+
+    <script>
+        // This part talks to your index.js "Brain"
+        fetch('/api/me')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('name').innerText = data.full_name;
+                document.getElementById('tagline').innerText = data.tagline;
+                document.getElementById('bio').innerText = data.about_me;
+                document.getElementById('email').innerText = data.email;
+                document.getElementById('email').href = "mailto:" + data.email;
+            });
+    </script>
+</body>
+</html>
