@@ -6,64 +6,121 @@
     <title>Satish | AI & ML Engineer Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0f172a; --accent: #3b82f6; --text: #1e293b; }
+        :root { --primary: #0f172a; --accent: #3b82f6; --text: #1e293b; --border: #e2e8f0; }
         * { scroll-behavior: smooth; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; margin: 0; background: #f1f5f9; color: var(--text); }
         
-        nav { position: sticky; top: 0; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); display: flex; justify-content: space-between; padding: 1rem 10%; z-index: 100; border-bottom: 1px solid #e2e8f0; }
-        nav a { text-decoration: none; color: var(--text); font-weight: 600; margin-left: 20px; }
+        /* Navigation */
+        nav { position: sticky; top: 0; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 10%; z-index: 100; border-bottom: 1px solid var(--border); }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--primary); }
+        .nav-pfp { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+        nav a { text-decoration: none; color: var(--text); font-weight: 600; margin-left: 20px; transition: 0.2s; }
+        nav a:hover { color: var(--accent); }
 
-        .hero { height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: white; border-bottom: 1px solid #e2e8f0; }
-        .hero h1 { font-family: 'Space Grotesk'; font-size: 4rem; margin: 0; color: var(--primary); }
+        /* Hero Section */
+        .hero { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: white; border-bottom: 1px solid var(--border); position: relative; }
+        .hero::before { content:''; position: absolute; width: 100%; height: 100%; background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 20px 20px; opacity: 0.5; }
+        .hero-content { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; }
+        .hero h1 { font-family: 'Space Grotesk'; font-size: 4rem; margin: 10px 0; color: var(--primary); letter-spacing: -2px; }
         
-        section { padding: 80px 10%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
-        
-        .skill-tag { display: inline-block; background: #dbeafe; color: #1e40af; padding: 5px 15px; border-radius: 20px; margin: 5px; font-size: 0.85rem; font-weight: 600; }
-        .milestone { border-left: 3px solid var(--accent); padding-left: 15px; margin-bottom: 20px; }
+        /* Main Hero Profile Picture */
+        .pfp-main { 
+            width: 150px; 
+            height: 150px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 5px solid white; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .pfp-main:hover { transform: scale(1.05); }
 
-        .contact-card { max-width: 600px; margin: 0 auto; background: var(--primary); color: white; padding: 3rem; border-radius: 25px; }
-        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: white; }
-        button { width: 100%; padding: 15px; border-radius: 8px; border: none; background: var(--accent); color: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        button:hover { opacity: 0.9; transform: scale(0.98); }
-        #statusMsg { margin-top: 15px; text-align: center; font-weight: 600; transition: all 0.3s; }
+        /* Main Content */
+        section { padding: 100px 10%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+        .card { background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid var(--border); transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        
+        h2 { font-size: 2rem; margin-top: 0; color: var(--primary); }
+        .section-title { text-align: center; font-size: 3rem; margin-bottom: 60px; font-family: 'Space Grotesk'; color: var(--primary); }
+
+        /* Skills & Milestones */
+        .skill-tag { display: inline-block; background: #dbeafe; color: #1e40af; padding: 6px 16px; border-radius: 50px; margin: 5px; font-size: 0.9rem; font-weight: 600; border: 1px solid #bfdbfe; }
+        .milestone { border-left: 3px solid var(--accent); padding-left: 20px; margin-bottom: 25px; position: relative; }
+        .milestone::before { content: ''; position: absolute; left: -6px; top: 0; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; }
+
+        /* Contact Section */
+        .contact-card { max-width: 650px; margin: 0 auto; background: var(--primary); color: white; padding: 4rem; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .contact-card h2 { color: white; margin-bottom: 10px; }
+        input, textarea { width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; font-size: 1rem; }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.1); }
+        button { width: 100%; padding: 18px; border-radius: 10px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.2s; margin-top: 15px; }
+        button:hover { background: #1d4ed8; transform: translateY(-2px); }
+        button:active { transform: translateY(1px); }
+        #statusMsg { margin-top: 20px; text-align: center; font-weight: 600; min-height: 24px; }
+
+        /* Footer */
+        footer { text-align: center; padding: 4rem; background: white; border-top: 1px solid var(--border); color: var(--text-sub); }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; }
+            nav a { margin-left: 10px; font-size: 0.9rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .pfp-main { width: 120px; height: 120px; }
+            section { padding: 60px 5%; }
+            .contact-card { padding: 2rem; }
+        }
     </style>
 </head>
 <body>
 
 <nav>
-    <div style="font-weight: 800; font-size: 1.2rem;">SATISH.AI</div>
-    <div><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div>
+    <a href="#" class="nav-logo">
+        <img src="photoo.jpg" alt="Satish" class="nav-pfp">
+        SATISH.AI
+    </a>
+    <div>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
 </nav>
 
 <header class="hero">
-    <h1 id="name">Satish</h1>
-    <p id="major" style="font-size: 1.5rem; color: #64748b;">B.Sc. AIML Student</p>
+    <div class="hero-content">
+        <img src="photoo.jpg" alt="Satish Pal" class="pfp-main">
+        <p style="color: var(--accent); font-weight: 700; margin: 0; text-transform: uppercase; letter-spacing: 2px;">Welcome</p>
+        <h1 id="name">Satish</h1>
+        <p id="major" style="font-size: 1.5rem; color: #64748b; margin-top: 0;">B.Sc. AIML Student</p>
+        <a href="#contact" style="background: var(--primary); color:white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 20px; display: inline-block;">Get In Touch</a>
+    </div>
 </header>
 
 <section id="about">
     <div class="grid">
         <div class="card">
             <h2>About Me</h2>
-            <p id="bio">Loading...</p>
+            <p id="bio" style="font-size: 1.1rem; color: var(--text); line-height: 1.8;">Loading profile from database...</p>
         </div>
         <div class="card">
             <h2>Technical Stack</h2>
+            <p style="color: var(--text-sub); margin-bottom: 20px;">Tools and technologies I use to build AI/ML solutions.</p>
             <div id="skills"></div>
         </div>
     </div>
 </section>
 
-<section id="projects" style="background: #fff;">
-    <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px;">Projects & Experience</h2>
+<section id="projects" style="background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <h2 class="section-title">Projects & Experience</h2>
     <div class="grid">
         <div class="card">
-            <h3>Milestones</h3>
+            <h3 style="color: var(--accent); font-size: 1.5rem;">Academic Milestones</h3>
             <div id="achievements"></div>
         </div>
         <div class="card">
-            <h3>Experience</h3>
+            <h3 style="color: var(--accent); font-size: 1.5rem;">Experience</h3>
             <div id="experience"></div>
         </div>
     </div>
@@ -71,45 +128,64 @@
 
 <section id="contact">
     <div class="contact-card">
-        <h2 style="color: white; margin-top: 0;">Let's Connect</h2>
+        <h2>Let's Connect</h2>
+        <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px;">Have a query or a collaboration idea? Drop a message directly into my TiDB database.</p>
         <form id="contactForm">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <textarea name="message" rows="4" placeholder="Message" required></textarea>
-            <button type="submit" id="submitBtn">Send Message</button>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email Address" required>
+            <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+            <button type="submit" id="submitBtn">Deploy Message</button>
             <div id="statusMsg"></div>
         </form>
     </div>
 </section>
 
+<footer>
+    <p style="font-weight: 700; color: var(--primary); font-size: 1.1rem;">Satish Pal</p>
+    <p>2nd Semester B.Sc. AIML</p>
+    <p style="font-size: 0.9rem; margin-top: 20px; color: #94a3b8;">&copy; 2024 | Powered by Node.js & TiDB Cloud Serverless</p>
+</footer>
+
 <script>
-    // Fetch Data from TiDB
+    // Fetch Data from TiDB backend
     fetch('/api/profile').then(res => res.json()).then(data => {
+        if (!data) return;
         document.getElementById('name').innerText = data.name;
         document.getElementById('major').innerText = data.major;
         document.getElementById('bio').innerText = data.about_me;
         
+        const skillsDiv = document.getElementById('skills');
         data.skills.split(',').forEach(s => {
-            document.getElementById('skills').innerHTML += `<span class="skill-tag">${s.trim()}</span>`;
+            if(s.trim()) skillsDiv.innerHTML += `<span class="skill-tag">${s.trim()}</span>`;
         });
         
+        const achDiv = document.getElementById('achievements');
         data.achievements.split('|').forEach(a => {
-            document.getElementById('achievements').innerHTML += `<div class="milestone">${a.trim()}</div>`;
+            if(a.trim()) achDiv.innerHTML += `<div class="milestone"><strong>${a.trim()}</strong></div>`;
         });
 
+        const expDiv = document.getElementById('experience');
         data.experience.split('|').forEach(e => {
-            document.getElementById('experience').innerHTML += `<div class="milestone">${e.trim()}</div>`;
+            if(e.trim()) expDiv.innerHTML += `<div class="milestone">${e.trim()}</div>`;
         });
+    }).catch(err => {
+        console.error("Profile Fetch Error:", err);
+        document.getElementById('bio').innerText = "Failed to load profile data. Check database connection.";
     });
 
-    // Handle Form with AJAX
+    // Handle Contact Form with AJAX (Fetch)
     const form = document.getElementById('contactForm');
     const status = document.getElementById('statusMsg');
+    const submitBtn = document.getElementById('submitBtn');
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        // UI Feedback
         status.innerText = "Sending to TiDB...";
-        status.style.color = "#fbbf24";
+        status.style.color = "#fbbf24"; // Amber
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Processing...";
 
         try {
             const res = await fetch('/api/contact', {
@@ -123,17 +199,24 @@
             });
             
             if (res.ok) {
-                status.innerText = "✔ Success! Saved in TiDB.";
-                status.style.color = "#4ade80";
+                const result = await res.json();
+                status.innerText = "✔ Success! Message saved in TiDB.";
+                status.style.color = "#4ade80"; // Green
                 form.reset();
+                
+                // Clear success message after 5 seconds
                 setTimeout(() => { status.innerText = ""; }, 5000);
             } else {
-                status.innerText = "✖ Server Error.";
-                status.style.color = "#f87171";
+                throw new Error("Server responded with an error");
             }
         } catch (err) {
-            status.innerText = "✖ Connection Failed.";
-            status.style.color = "#f87171";
+            console.error("Form Error:", err);
+            status.innerText = "✖ Connection failed. Please try again.";
+            status.style.color = "#f87171"; // Red
+        } finally {
+            // Restore button state
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Deploy Message";
         }
     });
 </script>
